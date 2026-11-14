@@ -203,6 +203,8 @@ def source_for_prototype(original_source):
         '    JSR RESPAWN_SPAWN_CHECK ; $8162; original JSR $EED3 redirected to spawn guard',
         '    JSR $EED3            ; $8225  20 D3 EE':
         '    JSR RESPAWN_SPAWN_CHECK ; $8225; original JSR $EED3 redirected to spawn guard',
+        '    JSR $EED3            ; $82C9  20 D3 EE':
+        '    JSR RESPAWN_SPAWN_CHECK ; $82C9; third spawn-list allocator path, previously uncovered',
         '    LDY #$C2             ; $8298  A0 C2\n    LDA $0480,X          ; $829A  BD 80 04':
         '    JMP RESPAWN_RECORD_ORIGIN ; $8298; record actor origin and run displaced bytes\n'
         '    .byte $80, $04        ; $829B ; orphaned argument of displaced LDA; NOT executed',
@@ -316,11 +318,12 @@ def make(root=ROOT):
     assert len(rom)==len(vanilla)
     assert rom[:16]==vanilla[:16] and rom[0x20010:]==vanilla[0x20010:]
     # A vanilla ROM never contained code in the FF cave; no unrelated ROM
-    # bytes may be affected except four intentional hook spots, the cave,
+    # bytes may be affected except five intentional hook spots, the cave,
     # and the two established mods (Leo+sprite Y).
     allowed=[(0x19BDB,0x19BDD),
         (16+6*0x4000+0x162,16+6*0x4000+0x165),
         (16+6*0x4000+0x225,16+6*0x4000+0x228),
+        (16+6*0x4000+0x2C9,16+6*0x4000+0x2CC),
         (16+6*0x4000+0x298,16+6*0x4000+0x29D),
         (16+6*0x4000+0x19AC,16+6*0x4000+0x19B1),
         (16+6*0x4000+0x3D92,16+6*0x4000+0x3FD8),
@@ -348,6 +351,7 @@ def make(root=ROOT):
       'cave_capacity_bytes':CAVE_LENGTH,
       'strong_enemy_definition':'static, nonboss enemy with initial HP >=32; waves excluded',
       'persistence':'up to 256 records in mapper-1 8KB PRG-RAM, cleared by bank7 fixed-vector RESET (not by selecting New Game)',
+      'hooked_actor_allocator_calls':['$8162','$8225','$82C9'],
       'limitations':['Not run in any NES emulator','Assumes PRG-RAM at $6000 is writable','New Game without RESET keeps defeat history','Sources need execution trace auditing to verify all spawn paths','May mark spawn source stale when reused by an alternate actor allocator','Does not remove respawns from independent timed enemy waves'],
     }
     (root/'build/no_respawn_PROTOTYPE_report.json').write_text(json.dumps(report,indent=2)+'\n')

@@ -12,6 +12,17 @@
 
 See `docs/LEONARDO_DAMAGE_SOURCE.md`, `docs/60FPS_LAG_REDUCTION.md`, and `docs/STRONG_ENEMY_RESPAWN_RESEARCH.md` for the exact work performed and remaining risks. The complete workspace history is in `docs/RECOVERY_PROJECT_README.md`.
 
+
+## Checkpoint 2 — easier source editing and stronger verification
+
+- **Editable weapon damage values:** modify `config/weapon_damage.json` and run `python tools/edit_weapon_damage.py --variant base` (or `--variant lag`). This generates buildable, labeled 6502 assembly and an IPS patch, changing only authorized damage bytes.
+- **Executable combat unit coverage:** `tests/test_combat_cpu_execution.py` now steps through the real 6502 damage selection/subtraction instructions rather than checking the table alone. This is **not** a full NES emulator or in-game validation.
+- **No-respawn experiment:** a third direct spawn allocator at bank 6 `$82C9` is now intercepted, with synthetic tests. The persistent-kill prototype is **still NOT gameplay-verified**, and may have New Game/PRG-RAM/actor-slot issues.
+- **No-slowdown verification gate:** `tools/check_crowded_lag.py` accepts complete original/modified emulator NMI trace CSVs and applies a crowded-scene zero-skipped-frame gate. **No real traces have yet been captured**, so neither the slowdown nor the overall 60 FPS objective can be declared fixed.
+- **One-command validation:** on Windows run `validate_update.bat`, or use `python tools/validate_checkpoint.py`; results are written to `build/CHECKPOINT_VALIDATION.json`.
+
+See `docs/NEXT_VALIDATION_AND_SPRITES.md`. Enemy sprite replacement is intentionally deferred until slowdown and respawn behavior are confirmed in emulator gameplay.
+
 ## Build and test
 
 Requires **Python 3**. From this directory:

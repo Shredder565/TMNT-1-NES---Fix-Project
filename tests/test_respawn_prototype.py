@@ -64,7 +64,7 @@ class MiniCPU:
         elif mode=='abs':val=self.read(raw)
         elif mode=='absx':val=self.read((raw+self.x)&0xffff)
         elif mode=='absy':val=self.read((raw+self.y)&0xffff)
-        elif mode in ('rel','imp'):val=0
+        elif mode in ('rel','imp','acc'):val=0
         else:raise RuntimeError(f'Unsupported addressing mode {mode} at {ip:04X}')
         if name in ('LDA','LDX','LDY'):
             setattr(self,{'LDA':'a','LDX':'x','LDY':'y'}[name],val)
@@ -79,6 +79,18 @@ class MiniCPU:
         elif name=='CPY':
             self.c=int(self.y>=val)
             self.flags((self.y-val)&0xff)
+        elif name=='SBC':
+            # NMOS 6502 binary-mode subtract; used by the actual weapon handler.
+            before=self.a
+            result=before-val-(1-self.c)
+            self.c=int(result>=0)
+            self.a=result&255
+            self.flags(self.a)
+        elif name=='ASL':
+            if mode!='acc':raise RuntimeError('MiniCPU ASL supports accumulator only')
+            self.c=int(bool(self.a&0x80))
+            self.a=(self.a<<1)&255
+            self.flags(self.a)
         elif name=='EOR':
             self.a^=val;self.flags(self.a)
         elif name=='TYA':
@@ -166,6 +178,21 @@ class NoRespawnPrototypeUnitTests(unittest.TestCase):
         c.write(0x1A,10)
         c.run(0x8225,0x8228)
         self.assertEqual(c.c,0,'different spawn point should still be allowed')
+        self.assertEqual(c.allocs,2)
+
+    def test_third_actor_allocator_spawn_path_is_guarded(self):
+        # The original bank6 also allocates via $82C9, a third spawn-list
+        # route that the v1 prototype missed. This isolated test ensures the
+        # new hook at that call site suppresses the exact killed record.
+        c=self.cpu()
+        self.spawn_and_kill(c)
+        self.assertEqual(c.allocs,1)
+        c.run(0x82C9,0x82CC)
+        self.assertEqual(c.c,1)
+        self.assertEqual(c.allocs,1)
+        c.write(0x1A,10)
+        c.run(0x82C9,0x82CC)
+        self.assertEqual(c.c,0)
         self.assertEqual(c.allocs,2)
 
     def test_stage_and_room_are_part_of_spawn_identity(self):

@@ -1,0 +1,6 @@
+{
+  "leonardo": {"normal": 15, "low_energy": 16},
+  "raphael": {"normal": 9, "low_energy": 9},
+  "michelangelo": {"normal": 7, "low_energy": 12},
+  "donatello": {"normal": 15, "low_energy": 16}
+}

@@ -18,6 +18,7 @@ Status as of **2026-11-14**: an **experimental ROM implementation** was built fr
 |---|---|---|
 | Bank 6 `$8162` | `JSR $EED3` on overworld static spawn | Redirect to `RESPAWN_SPAWN_CHECK`, which conditionally calls original allocator |
 | Bank 6 `$8225` | `JSR $EED3` on subarea spawn | Redirect to same guard |
+| Bank 6 `$82C9` | `JSR $EED3` on third spawn-list path | Redirect to same guard (**checkpoint 2**) |
 | Bank 6 `$8298` | `LDY #$C2; LDA $0480,X` | Jump into `RESPAWN_RECORD_ORIGIN` and resume at `$829D` after displaced instructions |
 | Bank 6 `$99AC` | `LDA #$00; STA $0560,X` on lethal damage | `JSR RESPAWN_MARK_DEAD; NOP; NOP`, then continue at `$99B1` |
 | Bank 6 `$BD92`–`$BFD7` | 582 `$FF` pad bytes | Injected, labeled 6502 routine (315 bytes), remaining pad is `$FF` |
@@ -30,7 +31,7 @@ Full source: `mods/leonardo_strong_enemy_respawn_PROTOTYPE/source/bank06.asm` an
 
 - Patched ROM is exactly 262,160 bytes, with the same iNES header, the same graphics, and the original reset vector.
 - Source reassembles and the IPS patch recreates the patched ROM byte-for-byte from the vanilla ROM.
-- Guarded source-edit script only modifies the identified hook sites, newly injected former-`$FF` space, and the separately audited Leonardo/old sprite-cycle edits.
+- Guarded source-edit script only modifies the identified hook sites (including the added `$82C9` hook), newly injected former-`$FF` space, and the separately audited Leonardo/old sprite-cycle edits.
 - A miniature 6502 interpreter (tests/test_respawn_prototype.py) runs the actual injected machine instructions to check: reset initialization; kill a strong enemy and suppress its exact spawn; leave other spawn points/rooms/levels unaffected; leave weak enemies and bosses unaffected; exclude waves.
 - Full project unit tests pass. **This is *not* a gameplay emulator test.**
 
@@ -67,3 +68,9 @@ A separately developed, unofficial **PC C-port** has an opt-in "stay dead" behav
 https://github.com/naparuba-retro/tmnt-recomp
 
 No code was copied from that repository into this NES package. This prototype consists of original assembly injected into free ROM bytes and sourced from analysis of the supplied USA NES ROM.
+
+## Checkpoint 2 addendum — third direct allocator call (`$82C9`)
+
+Source audit of the recovered bank 6 found a third `JSR $EED3` call in the spawn-list handling area at `$82C9`, not covered by the previous prototype. The experimental source hooks this third call via `JSR RESPAWN_SPAWN_CHECK` while keeping the original 3-byte instruction footprint. A synthetic 6502 test checks that a previously killed static spawn is suppressed through that call, while a distinct spawn is still allocated. Byte-change whitelist and IPS roundtrip checks were expanded accordingly.
+
+**Limitations still apply:** only the three identified direct calls are intercepted; indirect/different-bank spawners may exist, and a real emulator must confirm bank mapping, PRG-RAM, `New Game` reset semantics and progression. The addendum does not supersede the warning above that the whole prototype is unverified in gameplay.

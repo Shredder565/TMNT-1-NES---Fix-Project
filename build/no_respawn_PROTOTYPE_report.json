@@ -1,8 +1,8 @@
 {
   "status": "UNTESTED PROTOTYPE; gameplay/PRG-RAM compatibility not validated",
-  "rom": "build/TMNT_Leo_Lag_NoRespawn_UNTESTED_PROTOTYPE.nes",
-  "ips": "build/TMNT_Leo_Lag_NoRespawn_UNTESTED_PROTOTYPE.ips",
-  "sha256": "da601cb6c5f2b028165069c3e9e632e74d713544c1c17027078ed67a931fc5bc",
+  "rom": "build\\TMNT_Leo_Lag_NoRespawn_UNTESTED_PROTOTYPE.nes",
+  "ips": "build\\TMNT_Leo_Lag_NoRespawn_UNTESTED_PROTOTYPE.ips",
+  "sha256": "4b070bd31200759d66bf63302a95eb774e4f3b766ea5a30e74bf4805694ca5a7",
   "cave_cpu_start": "$BD92",
   "cave_cpu_end": "$BFD7",
   "injected_code_bytes": 315,
@@ -10,6 +10,11 @@
   "cave_capacity_bytes": 582,
   "strong_enemy_definition": "static, nonboss enemy with initial HP >=32; waves excluded",
   "persistence": "up to 256 records in mapper-1 8KB PRG-RAM, cleared by bank7 fixed-vector RESET (not by selecting New Game)",
+  "hooked_actor_allocator_calls": [
+    "$8162",
+    "$8225",
+    "$82C9"
+  ],
   "limitations": [
     "Not run in any NES emulator",
     "Assumes PRG-RAM at $6000 is writable",

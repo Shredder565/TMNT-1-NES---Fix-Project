@@ -1,3 +1,21 @@
+TMNT NES Checkpoint 2 — FIRST STEPS
+
+1) Double-click validate_update.bat (needs Python 3).
+   It generates six ROM variants and build\CHECKPOINT_VALIDATION.json.
+2) To change turtle weapon strength, edit config\weapon_damage.json.
+3) Then run: python tools\edit_weapon_damage.py --variant base
+   Or --variant lag for the earlier unmeasured sprite-cycle speed experiment.
+4) To analyze emulator traces, see docs\NEXT_VALIDATION_AND_SPRITES.md.
+5) When ready to publish source changes on Windows, run:
+   powershell -ExecutionPolicy Bypass -File .\push_to_github.ps1
+   The .gitignore prevents .nes ROMs from being committed.
+
+STATUS:
+ - 35 automated code/rebuild/unit tests pass in this checkpoint.
+ - Enemy respawn (including new third allocator hook) is EXPERIMENTAL.
+ - Actual 60 FPS under crowded scenes is NOT confirmed.
+ - No enemy artwork was replaced: sprite work is reserved for later.
+
 TMNT NES (USA) — Editable Source + Leonardo Damage Mod + Strong Enemy No-Respawn Prototype
 Updated 2026-11-14 — NES VERSION ONLY. No GBA materials.
 

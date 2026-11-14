@@ -1,0 +1,45 @@
+{
+  "project": "TMNT NES (USA) reverse engineering, gameplay modifications",
+  "automated_tests_passed": 35,
+  "byte_exact_original_rebuild": true,
+  "actual_6502_combat_routine_unit_execution": true,
+  "strong_enemy_spawn_synthetic_test": true,
+  "enemy_respawn_emulator_playtest": "NOT PERFORMED",
+  "lag_frame_crowded_scene_replay": "NOT PROVIDED",
+  "sustained_60_gameplay_updates_in_crowded_scene": "NOT CONFIRMED",
+  "leonardo_hitbox_reach_changed": false,
+  "enemy_sprites_replaced": false,
+  "roms": {
+    "vanilla": {
+      "file": "Teenage Mutant Ninja Turtles (Rebuilt).nes",
+      "sha256": "dc9acc00f081ffc396ec4c8477904e1a5046c242081ebadabef3503ee0d99628",
+      "bytes": 262160
+    },
+    "leonardo_damage_only": {
+      "file": "TMNT_Leonardo_Equals_Donatello.nes",
+      "sha256": "6018d964a5c5a3c8ea4cbeb41d75054659d27c1b8f0eb24923dc91d98bee6106",
+      "bytes": 262160
+    },
+    "leonardo_plus_lag_experiment": {
+      "file": "TMNT_Leonardo_And_LagReduction_EXPERIMENTAL.nes",
+      "sha256": "95187ed43c1515aa0e6a8a7f6d6b002568b8a837de9c9c20db7c07644804f125",
+      "bytes": 262160
+    },
+    "leonardo_plus_lag_plus_respawn_prototype": {
+      "file": "TMNT_Leo_Lag_NoRespawn_UNTESTED_PROTOTYPE.nes",
+      "sha256": "4b070bd31200759d66bf63302a95eb774e4f3b766ea5a30e74bf4805694ca5a7",
+      "bytes": 262160
+    },
+    "custom_damage_base": {
+      "file": "TMNT_Custom_Weapon_Damage_base.nes",
+      "sha256": "6018d964a5c5a3c8ea4cbeb41d75054659d27c1b8f0eb24923dc91d98bee6106",
+      "bytes": 262160
+    },
+    "custom_damage_lag": {
+      "file": "TMNT_Custom_Weapon_Damage_lag.nes",
+      "sha256": "95187ed43c1515aa0e6a8a7f6d6b002568b8a837de9c9c20db7c07644804f125",
+      "bytes": 262160
+    }
+  },
+  "next_gate": "Use real NES emulator traces with tools/check_crowded_lag.py and playtest respawn/new-game/boss progression."
+}

@@ -23,7 +23,7 @@ try {
         $pending = ($LASTEXITCODE -eq 1)
         if ($LASTEXITCODE -gt 1) { throw 'Could not inspect staged changes' }
         if ($pending) {
-            git commit -m 'Import NES reverse-engineering source, patches and tests'
+            git commit -m 'Add TMNT combat source editing and gameplay validation gates'
             Check-Git
         } else { Write-Host 'No changes to commit.' }
         git branch --show-current

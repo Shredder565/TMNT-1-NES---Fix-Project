@@ -382,7 +382,7 @@ B06_82C7:
 B06_82C8:
     RTS                  ; $82C8  60
 B06_82C9:
-    JSR $EED3            ; $82C9  20 D3 EE
+    JSR RESPAWN_SPAWN_CHECK ; $82C9; third spawn-list allocator path, previously uncovered
     BCS B06_82C8         ; $82CC  B0 FA
     LDY $1A              ; $82CE  A4 1A
     LDA ($42),Y          ; $82D0  B1 42
