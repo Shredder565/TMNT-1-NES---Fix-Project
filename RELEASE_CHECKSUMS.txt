@@ -1,0 +1,15 @@
+TMNT NES checkpoint — binary checksums (SHA-256)
+
+Vanilla exact rebuild (not modified):
+  dc9acc00f081ffc396ec4c8477904e1a5046c242081ebadabef3503ee0d99628
+  build/Teenage Mutant Ninja Turtles (Rebuilt).nes
+
+Dispatcher source recompilation (identical to vanilla):
+  dc9acc00f081ffc396ec4c8477904e1a5046c242081ebadabef3503ee0d99628
+  build/TMNT_Dispatch_Rebuilt.nes
+
+60fps-targeted sprite optimization v1 (EXPERIMENTAL modified ROM):
+  43ff01e167114910272ba8860e3b598e682624b548bbb5658043f61feda64cc9
+  build/TMNT_NES_Lag_Reduction_v1_EXPERIMENTAL.nes
+
+The modified ROM does not yet have emulator-proven 60fps behavior.

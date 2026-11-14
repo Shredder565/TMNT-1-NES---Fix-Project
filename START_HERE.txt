@@ -1,0 +1,46 @@
+TMNT NES (USA) — Editable Source + Leonardo Damage Mod + Strong Enemy No-Respawn Prototype
+Updated 2026-11-14 — NES VERSION ONLY. No GBA materials.
+
+RECOMMENDED FIRST TEST (minimal-risk byte-exact mod):
+  build/TMNT_Leonardo_Equals_Donatello.nes
+  Leonardo primary-weapon damage: normal 7 -> 15, low-energy 10 -> 16.
+  This matches Donatello. Sword range / physical hit detection geometry unchanged.
+
+OPTIONAL, PREVIOUS CPU OPTIMIZATION:
+  build/TMNT_Leonardo_And_LagReduction_EXPERIMENTAL.nes
+  Same damage buff plus earlier 3-cycle-per-sprite optimization.
+  It is NOT proven to reach 60 FPS in crowded scenes.
+
+OPTIONAL / HIGHER RISK / NOT GAMEPLAY VERIFIED:
+  build/TMNT_Leo_Lag_NoRespawn_UNTESTED_PROTOTYPE.nes
+  Adds new 6502 code to try to remember defeated non-boss static enemies
+  with at least 32 initial HP and suppress their spawn entries on return.
+  Requires MMC1 mapper PRG-RAM support. Bosses and waves are excluded.
+  Passes isolated 6502 unit tests, but has not been run in a NES emulator.
+  MAY HAVE GAMEPLAY BUGS. Do not assume the no-respawn feature is finished.
+
+USE ON WINDOWS:
+  Double-click build_character_and_enemy_experiments.bat to regenerate all 3 ROMs.
+  Requires Python 3 available as 'python'.
+
+EDITABLE SOURCE:
+  mods/leonardo_equal_donatello/source/bank06.asm
+  mods/leonardo_plus_lag_experiment/source/
+  mods/leonardo_strong_enemy_respawn_PROTOTYPE/source/
+  See docs/LEONARDO_DAMAGE_SOURCE.md and docs/STRONG_ENEMY_RESPAWN_RESEARCH.md
+
+REBUILD AN EDITED PROFILE (run from project folder):
+  python tools/build.py --source-dir mods/leonardo_equal_donatello/source --output build/MY_MOD.nes
+
+IPS PATCHES:
+  build/TMNT_Leonardo_Equals_Donatello.ips
+  build/TMNT_Leonardo_And_LagReduction_EXPERIMENTAL.ips
+  build/TMNT_Leo_Lag_NoRespawn_UNTESTED_PROTOTYPE.ips
+  They apply ONLY to the supplied exact USA original ROM.
+
+VERIFICATION:
+  python -m unittest discover -s tests -v
+  28 static and synthetic CPU tests pass. No emulator playtest was performed.
+
+Previous NES source recovery, character graphics tools, editable ASM, and ROM
+rebuild tools are all included. The original user-supplied NES ROM is in original/.

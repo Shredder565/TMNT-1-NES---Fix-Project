@@ -1,0 +1,14 @@
+{
+  "name": "Lag reduction experiment v1 - sprite Y coordinate write 12 to 9 cycles",
+  "status": "CPU-cycle equivalent patch; NOT benchmarked in gameplay; NOT guaranteed 60fps",
+  "patches": [
+    {
+      "region": "prg",
+      "bank": 7,
+      "cpu_address": "$C114",
+      "expect": "9D 00 02 DE 00 02",
+      "replace": "38 E9 01 9D 00 02",
+      "note": "Old STA abs,X / DEC abs,X (12 cycles) -> SEC / SBC #1 / STA abs,X (9 cycles). The stored byte remains (A-1) modulo 256. Carry/status used afterward is restored by PLP at $C120. Saves 3 cycles per sprite tile, not 3 cycles per entire actor update."
+    }
+  ]
+}

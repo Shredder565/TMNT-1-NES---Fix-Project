@@ -1,0 +1,12 @@
+# Retail ROMs and local/test builds must not be committed
+*.nes
+*.gba
+/original/
+/build/*.nes
+/build/*test*.log
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+.venv/
+venv/

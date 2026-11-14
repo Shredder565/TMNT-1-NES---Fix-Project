@@ -1,0 +1,50 @@
+{
+  "project": "TMNT NES (USA)",
+  "vanilla_sha256": "dc9acc00f081ffc396ec4c8477904e1a5046c242081ebadabef3503ee0d99628",
+  "weapon_damage_table_cpu_address": "bank 6 $9BCB",
+  "leonardo_changed": [
+    "normal 7 -> 15",
+    "low-energy 10 -> 16"
+  ],
+  "donatello_unchanged": [
+    "normal 15",
+    "low-energy 16"
+  ],
+  "scope": "Attack damage when a weapon hit is registered; weapon reach/hitbox unchanged",
+  "strong_enemy_respawn_status": "NOT IMPLEMENTED; see docs/STRONG_ENEMY_RESPAWN_RESEARCH.md",
+  "enemy_hp_candidates": "analysis/enemy_hp_type_candidates.csv",
+  "roms": {
+    "leonardo_equal_donatello": {
+      "rom": "build/TMNT_Leonardo_Equals_Donatello.nes",
+      "ips": "build/TMNT_Leonardo_Equals_Donatello.ips",
+      "sha256": "6018d964a5c5a3c8ea4cbeb41d75054659d27c1b8f0eb24923dc91d98bee6106",
+      "changed_rom_offsets": [
+        "0x19BDB",
+        "0x19BDC"
+      ],
+      "built_from_editable_6502_asm": true,
+      "gameplay_emulator_testing": "not performed",
+      "strong_enemy_no_respawn": "NOT IMPLEMENTED",
+      "leonardo_damage_equals_donatello": true,
+      "sprite_cycle_reduction_unbenchmarked": false
+    },
+    "leonardo_plus_lag_experiment": {
+      "rom": "build/TMNT_Leonardo_And_LagReduction_EXPERIMENTAL.nes",
+      "ips": "build/TMNT_Leonardo_And_LagReduction_EXPERIMENTAL.ips",
+      "sha256": "95187ed43c1515aa0e6a8a7f6d6b002568b8a837de9c9c20db7c07644804f125",
+      "changed_rom_offsets": [
+        "0x19BDB",
+        "0x19BDC",
+        "0x1C124",
+        "0x1C125",
+        "0x1C126",
+        "0x1C127"
+      ],
+      "built_from_editable_6502_asm": true,
+      "gameplay_emulator_testing": "not performed",
+      "strong_enemy_no_respawn": "NOT IMPLEMENTED",
+      "leonardo_damage_equals_donatello": true,
+      "sprite_cycle_reduction_unbenchmarked": true
+    }
+  }
+}

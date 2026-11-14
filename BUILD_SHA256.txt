@@ -1,0 +1,6 @@
+da601cb6c5f2b028165069c3e9e632e74d713544c1c17027078ed67a931fc5bc  build/TMNT_Leo_Lag_NoRespawn_UNTESTED_PROTOTYPE.nes
+95187ed43c1515aa0e6a8a7f6d6b002568b8a837de9c9c20db7c07644804f125  build/TMNT_Leonardo_And_LagReduction_EXPERIMENTAL.nes
+6018d964a5c5a3c8ea4cbeb41d75054659d27c1b8f0eb24923dc91d98bee6106  build/TMNT_Leonardo_Equals_Donatello.nes
+dc9acc00f081ffc396ec4c8477904e1a5046c242081ebadabef3503ee0d99628  original/Teenage Mutant Ninja Turtles (USA).nes
+
+NOTE: emulated gameplay testing has not been performed.

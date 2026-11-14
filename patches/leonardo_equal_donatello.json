@@ -1,0 +1,14 @@
+{
+  "name": "Leonardo primary-weapon damage equals Donatello (both health states)",
+  "status": "byte-exact assembly and IPS validated; gameplay emulator testing still required",
+  "patches": [
+    {
+      "region": "prg",
+      "bank": 6,
+      "cpu_address": "$9BCB",
+      "expect": "07 0A",
+      "replace": "0F 10",
+      "note": "At B6:$99A2 the enemy hit handler subtracts $9BCB,Y from enemy HP. In the two-byte-per-turtle primary weapon table, copy Donatello's normal (15) and low-energy (16) damage to Leonardo (was 7 and 10). Does not modify physical hitboxes or attack reach."
+    }
+  ]
+}

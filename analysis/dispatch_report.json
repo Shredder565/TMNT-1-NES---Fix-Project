@@ -1,0 +1,79 @@
+{
+  "methods": "static inline jump tables + guarded recursive disassembly",
+  "observed_in_runtime": false,
+  "fixed_bank_code_bytes": 7745,
+  "fixed_bank_instruction_count": 3840,
+  "new_dispatch_root_count": 26,
+  "new_root_accepted_count": 201,
+  "baseline_instruction_count": 1018,
+  "tables": [
+    {
+      "cpu_address": "$C558",
+      "name": "FRAME_STATE_HANDLERS",
+      "targets": [
+        "$C564",
+        "$C627",
+        "$C65C",
+        "$C669",
+        "$CB07",
+        "$C699"
+      ],
+      "note": "CPU bank for $8000-$BFFF targets is unknown until traced"
+    },
+    {
+      "cpu_address": "$C569",
+      "name": "FRAME_SUBSTATE_HANDLERS",
+      "targets": [
+        "$C571",
+        "$C59C",
+        "$C5E1",
+        "$C60F"
+      ],
+      "note": "CPU bank for $8000-$BFFF targets is unknown until traced"
+    },
+    {
+      "cpu_address": "$CB26",
+      "name": "GAME_MODE_HANDLERS",
+      "targets": [
+        "$CB3E",
+        "$CB54",
+        "$D2D0",
+        "$CB5C",
+        "$D4C8",
+        "$CBBF",
+        "$CC18",
+        "$CCCD",
+        "$CD0A",
+        "$CB57",
+        "$CD55",
+        "$CCFD"
+      ],
+      "note": "CPU bank for $8000-$BFFF targets is unknown until traced"
+    },
+    {
+      "cpu_address": "$D20F",
+      "name": "SWITCHABLE_BANK_HANDLERS",
+      "targets": [
+        "$BBC8",
+        "$BBF5",
+        "$BC78",
+        "$BC1E",
+        "$BC1E",
+        "$BC88"
+      ],
+      "note": "CPU bank for $8000-$BFFF targets is unknown until traced"
+    },
+    {
+      "cpu_address": "$D9C9",
+      "name": "MOVEMENT_STATE_HANDLERS",
+      "targets": [
+        "$D9D1",
+        "$D9E3",
+        "$D9D8",
+        "$D9F2"
+      ],
+      "note": "CPU bank for $8000-$BFFF targets is unknown until traced"
+    }
+  ],
+  "foreign_jumps": 19
+}

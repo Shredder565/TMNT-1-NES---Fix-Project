@@ -1,0 +1,10 @@
+{
+  "name": "Format demonstration only (does not change the game)",
+  "patches": [
+    {
+      "region": "prg", "bank": 5, "cpu_address": "$8001",
+      "expect": "A5 27", "replace": "A5 27",
+      "note": "Byte-exact no-op example. Replace only after researching the routine."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "mod": "lag_reduction_v1",
+  "claim": "Cycle-optimized sprite-Y write; NOT proven 60 FPS",
+  "rom_original_sha256": "dc9acc00f081ffc396ec4c8477904e1a5046c242081ebadabef3503ee0d99628",
+  "rom_modified_sha256": "43ff01e167114910272ba8860e3b598e682624b548bbb5658043f61feda64cc9",
+  "patch_cpu_address": "$C114",
+  "prg_bank": 7,
+  "rom_byte_offsets": [
+    "0x1C124",
+    "0x1C125",
+    "0x1C126",
+    "0x1C127"
+  ],
+  "bytes_changed": 4,
+  "old_instruction_cycles": 12,
+  "new_instruction_cycles": 9,
+  "cpu_cycles_saved_per_sprite_tile": 3,
+  "measurements_of_actual_lag": 0,
+  "runtime_gameplay_test_passed": false,
+  "original_nes_frame_rate_ntsc_hz": 60.0988,
+  "notes": "Does not add CPU hardware budget; run representative enemy-heavy scenes with an instrumented emulator."
+}
